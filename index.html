@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer color rolls</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+body {
+    background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+button {
+    background-color:#FF9700;
+    color:#0AFF00;
+    padding:8px 10px;
+    font-size: 16px;
+    border-radius:4px;
+    text-align:center;
+    center:8px;
+    margin:124px;
+    padding:20px;
+  
+}
+
+.ball, .specialBall {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: orange;
+    color: white;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.specialBall {
+    background-color: red;
+}
+
+.lottery {
+   
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>請點擊按鍵選號 謝謝</h1>
+    <div class="lottery">
+        <h2>威力彩</h2>
+        <button id="powerButton">選號</button>
+        <div id="powerNumbers"></div>
+    </div>
+    <div class="button-container">
+        <button id="resetButton" style="display: none;">重新選號</button>
+    </div>
+</div>
+
+<script>
+const powerButton = document.getElementById('powerButton');
+const resetButton = document.getElementById('resetButton');
+const powerNumbers = document.getElementById('powerNumbers');
+
+powerButton.addEventListener('click', function() {
+    const randomNumbers = [];
+    for (let i = 0; i < 6; i++) {
+        randomNumbers.push(Math.floor(Math.random() * 49) + 1);
+    }
+    
+    const specialNumber = Math.floor(Math.random() * 8) + 1;
+
+    powerNumbers.innerHTML = randomNumbers.map(number => `<div class="ball">${number}</div>`).join('') 
+        + `<div class="specialBall">${specialNumber}</div>`;
+
+    powerButton.style.display = 'none';
+    resetButton.style.display = 'block';
+});
+
+resetButton.addEventListener('click', function() {
+    powerNumbers.innerHTML = '';
+    powerButton.style.display = 'block';
+    resetButton.style.display = 'none';
+});
+
+</script>
+
+</body>
+</html>
